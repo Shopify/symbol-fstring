@@ -6,3 +6,8 @@
 /pkg/
 /spec/reports/
 /tmp/
+
+*.bundle
+*.so
+Gemfile.lock
+

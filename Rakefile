@@ -7,4 +7,12 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList["test/**/*_test.rb"]
 end
 
-task :default => :test
+task :default => [:build, :test]
+
+require 'rake/extensiontask'
+GEMSPEC = eval(File.read('fstring.gemspec'))
+Rake::ExtensionTask.new('fstring', GEMSPEC) do |ext|
+  ext.ext_dir = 'ext/fstring'
+  ext.lib_dir = 'lib/fstring'
+end
+task build: :compile
