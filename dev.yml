@@ -1,0 +1,22 @@
+name: fstring
+
+type: ruby
+
+up:
+  - homebrew:
+    - openssl
+  - ruby: 2.6.3
+  - bundler
+
+commands:
+  console:
+    desc:   'start a console'
+    run:    bin/console
+  run:
+    desc:   'start the application'
+    run:    bin/run
+  test:
+    syntax:
+      argument: file
+      optional: args...
+    run: bin/testunit
