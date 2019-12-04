@@ -31,11 +31,25 @@ class FStringTest < Minitest::Test
     end
   end
 
+  def test_symbol_id2name_is_not_patched
+    with_patch do
+      fstring = :foo.id2name
+      assert_equal 'foo', fstring
+      assert_equal Encoding::US_ASCII, fstring.encoding
+      refute_fstring fstring
+    end
+  end
+
   private
 
   def assert_fstring(string)
     description = JSON.parse(ObjectSpace.dump(string))
     assert description["fstring"], "Expected #{string.inspect} to be interned, but wasn't"
+  end
+
+  def refute_fstring(string)
+    description = JSON.parse(ObjectSpace.dump(string))
+    refute description["fstring"], "Expected #{string.inspect} to not be interned, but it was"
   end
 
   def with_patch
