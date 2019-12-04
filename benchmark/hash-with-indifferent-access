@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require "fstring"
+require "active_support/hash_with_indifferent_access"
+require 'benchmark/ips'
+
+class PatchedHash < ActiveSupport::HashWithIndifferentAccess
+  private
+
+  def convert_key(key)
+    key.is_a?(Symbol) ? FString.symbol_to_s(key) : key
+  end
+end
+
+BASE = ActiveSupport::HashWithIndifferentAccess.new(foo: 42)
+PATCHED = PatchedHash.new(foo: 42)
+
+Benchmark.ips do |bench|
+  bench.report("HWIA#[:foo]") { BASE[:foo] }
+  bench.report("PatchedHash#[:foo]") { PATCHED[:foo] }
+end
