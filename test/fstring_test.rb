@@ -7,14 +7,14 @@ class FStringTest < Minitest::Test
     refute_nil ::FString::VERSION
   end
 
-  def test_returns_internal_symbol_fstring
+  def test_FString_symbol_to_s_returns_internal_symbol_fstring
     fstring = FString.symbol_to_s(:foo)
     assert_equal 'foo', fstring
     assert_equal Encoding::US_ASCII, fstring.encoding
     assert_fstring fstring
   end
 
-  def test_works_with_dynamic_symbols
+  def test_FString_symbol_to_s_works_with_dynamic_symbols
     string = "abceslfkdslfkdsfsdlfsfd"
     fstring = FString.symbol_to_s(string.to_sym)
     assert_equal string, fstring
@@ -22,7 +22,27 @@ class FStringTest < Minitest::Test
     assert_fstring fstring
   end
 
-  def test_symbol_to_s_is_patched
+  def test_FString_to_s_returns_internal_symbol_fstring
+    fstring = FString.to_s(:foo)
+    assert_equal 'foo', fstring
+    assert_equal Encoding::US_ASCII, fstring.encoding
+    assert_fstring fstring
+  end
+
+  def test_FString_to_s_works_with_dynamic_symbols
+    string = "abceslfkdslfkdsfsdlfsfd"
+    fstring = FString.to_s(string.to_sym)
+    assert_equal string, fstring
+    assert_equal Encoding::US_ASCII, fstring.encoding
+    assert_fstring fstring
+  end
+
+  def test_FString_to_s_call_to_s_on_non_symbols
+    object = Object.new
+    assert_equal object.to_s, FString.to_s(object)
+  end
+
+  def test_Symbol_to_s_is_patched
     with_patch do
       fstring = :foo.to_s
       assert_equal 'foo', fstring
@@ -31,7 +51,7 @@ class FStringTest < Minitest::Test
     end
   end
 
-  def test_symbol_id2name_is_not_patched
+  def test_Symbol_id2name_is_not_patched
     with_patch do
       fstring = :foo.id2name
       assert_equal 'foo', fstring

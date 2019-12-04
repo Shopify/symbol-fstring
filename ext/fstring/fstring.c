@@ -7,6 +7,16 @@ rb_symbol_to_fstring(VALUE symbol)
 }
 
 VALUE
+rb_fstring_to_s(VALUE rb_mFString, VALUE object)
+{
+    if (RB_TYPE_P(object, T_SYMBOL)) {
+        return rb_sym2str(object);
+    } else {
+        return rb_funcall(object, rb_intern("to_s"), 0);
+    }
+}
+
+VALUE
 rb_fstring_symbol_to_s(VALUE rb_mFString, VALUE symbol)
 {
     return rb_sym2str(symbol);
@@ -38,6 +48,7 @@ void Init_fstring()
 
     rb_mFString = rb_const_get(rb_cObject, rb_intern("FString"));
     rb_define_singleton_method(rb_mFString, "symbol_to_s", rb_fstring_symbol_to_s, 1);
+    rb_define_singleton_method(rb_mFString, "to_s", rb_fstring_to_s, 1);
     rb_define_singleton_method(rb_mFString, "patch_symbol!", rb_fstring_patch_symbol, 0);
     rb_define_singleton_method(rb_mFString, "unpatch_symbol!", rb_fstring_unpatch_symbol, 0);
 }
