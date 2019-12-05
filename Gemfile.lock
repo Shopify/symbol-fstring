@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fstring (0.1.0)
+    symbol-fstring (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -30,9 +30,9 @@ DEPENDENCIES
   activesupport
   benchmark-ips (~> 2.7)
   bundler (~> 2.0)
-  fstring!
   minitest (~> 5.0)
   rake (~> 10.0)
+  symbol-fstring!
 
 BUNDLED WITH
    2.0.2

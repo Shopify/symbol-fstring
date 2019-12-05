@@ -1,6 +1,6 @@
-# FString
+# symbol-fstring
 
-FString is a Ruby extension that provide access to symbols internal string representations.
+`symbol-fstring` is a Ruby extension that provide access to symbols internal string representations.
 
 ## Why?
 
@@ -18,7 +18,7 @@ but unfortunately it got reverted, and probably won't happen before a while.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'fstring'
+gem 'symbol-fstring'
 ```
 
 And then execute:
@@ -27,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fstring
+    $ gem install symbol-fstring
 
 ## Usage
 
@@ -73,7 +73,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Shopify/fstring.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Shopify/symbol-fstring.
 
 ## License
 

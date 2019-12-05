@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "fstring/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "fstring"
+  spec.name          = "symbol-fstring"
   spec.version       = FString::VERSION
   spec.authors       = ["Jean Boussier"]
   spec.email         = ["jean.boussier@gmail.com"]
 
   spec.summary       = %q{Allow fast access to internal fstring of symbols and modules}
-  spec.homepage      = "https://github.com/Shopify/fstring"
+  spec.homepage      = "https://github.com/Shopify/symbol-fstring"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
