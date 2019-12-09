@@ -58,8 +58,8 @@ From `benchmark/symbol-to_s`
 
 ```
  Symbol#to_s (orig)     12.786M (± 1.5%) i/s -     64.032M in   5.009020s
-FString#symbol_to_s     20.371M (± 1.7%) i/s -    101.981M in   5.007706s
-       FString#to_s     19.086M (± 1.5%) i/s -     95.410M in   5.000016s
+FString.symbol_to_s     20.371M (± 1.7%) i/s -    101.981M in   5.007706s
+       FString.to_s     19.086M (± 1.5%) i/s -     95.410M in   5.000016s
 Symbol#to_s (patch)     21.669M (± 1.9%) i/s -    108.591M in   5.013331s
 ```
 
