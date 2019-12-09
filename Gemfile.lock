@@ -18,6 +18,8 @@ GEM
       concurrent-ruby (~> 1.0)
     minitest (5.11.3)
     rake (10.5.0)
+    rake-compiler (1.0.8)
+      rake
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
@@ -32,6 +34,7 @@ DEPENDENCIES
   bundler (~> 2.0)
   minitest (~> 5.0)
   rake (~> 10.0)
+  rake-compiler
   symbol-fstring!
 
 BUNDLED WITH
