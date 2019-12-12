@@ -44,7 +44,7 @@ FString.patch_symbol!
 Or you can also add it this way in your Gemfile:
 
 ```ruby
-gem 'fstring', require: 'fstring/all'
+gem 'symbol-fstring', require: 'fstring/all'
 ```
 
 ### `FString.to_s`
