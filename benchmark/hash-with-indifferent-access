@@ -10,7 +10,7 @@ class PatchedHash < ActiveSupport::HashWithIndifferentAccess
   private
 
   def convert_key(key)
-    key.is_a?(Symbol) ? FString.symbol_to_s(key) : key
+    key.is_a?(Symbol) ? key.name : key
   end
 end
 

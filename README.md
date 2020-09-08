@@ -11,7 +11,9 @@ The problem with this is that `Symbol#to_s` creates a new string every time it i
 in hotspots, it causes a lot of work for the garbage collector, and cause many identical strings to be kept in memory.
 
 There was [an attempt to make `Symbol#to_s` return it's internal fstring for Ruby 2.7](https://bugs.ruby-lang.org/issues/16150),
-but unfortunately it got reverted, and probably won't happen before a while.
+but unfortunately it got reverted, instead [Ruby 3.0 should have `Symbol#name`](https://github.com/ruby/ruby/commit/eb67c603ca7e435181684857e650b4633fda5bb6).
+
+This gem backports the `Symbol#name` method for older rubies, and optionally allow to replace `Symbol#to_s` by `Symbol#name`.
 
 ## Installation
 
@@ -33,6 +35,10 @@ Or install it yourself as:
 
 `FString` can be used in two ways. 
 
+### `Symbol.name`
+
+By default this gem backport the Ruby 3.0 `Symbol#name` method.
+
 ### `FString.patch_symbol!`
 
 If your application and your dependencies are compatible with it, you can change `Symbol#to_s` behavior globally with:
@@ -47,20 +53,13 @@ Or you can also add it this way in your Gemfile:
 gem 'symbol-fstring', require: 'fstring/all'
 ```
 
-### `FString.to_s`
-
-If you don't want to patch the core `Symbol` class, you can alternatively substitute `some_symbol.to_s` for
-`FString.to_s(some_symbol)` in your own code.
-
 ### Benchmark
 
 From `benchmark/symbol-to_s`
 
 ```
- Symbol#to_s (orig)     12.786M (± 1.5%) i/s -     64.032M in   5.009020s
-FString.symbol_to_s     20.371M (± 1.7%) i/s -    101.981M in   5.007706s
-       FString.to_s     19.086M (± 1.5%) i/s -     95.410M in   5.000016s
-Symbol#to_s (patch)     21.669M (± 1.9%) i/s -    108.591M in   5.013331s
+  Symbol#to_s (orig)     11.748M (± 1.7%) i/s -     58.786M in   5.005571s
+ Symbol#name (patch)     18.067M (± 1.9%) i/s -     90.510M in   5.011549s
 ```
 
 But there's also a reduced pressure on the garbage collector.

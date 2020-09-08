@@ -7,39 +7,19 @@ class FStringTest < Minitest::Test
     refute_nil ::FString::VERSION
   end
 
-  def test_FString_symbol_to_s_returns_internal_symbol_fstring
-    fstring = FString.symbol_to_s(:foo)
+  def test_Symbol_name_returns_internal_symbol_fstring
+    fstring = :foo.name
     assert_equal 'foo', fstring
     assert_equal Encoding::US_ASCII, fstring.encoding
     assert_fstring fstring
   end
 
-  def test_FString_symbol_to_s_works_with_dynamic_symbols
+  def test_Symbol_name_works_with_dynamic_symbols
     string = "abceslfkdslfkdsfsdlfsfd"
-    fstring = FString.symbol_to_s(string.to_sym)
+    fstring = string.to_sym.name
     assert_equal string, fstring
     assert_equal Encoding::US_ASCII, fstring.encoding
     assert_fstring fstring
-  end
-
-  def test_FString_to_s_returns_internal_symbol_fstring
-    fstring = FString.to_s(:foo)
-    assert_equal 'foo', fstring
-    assert_equal Encoding::US_ASCII, fstring.encoding
-    assert_fstring fstring
-  end
-
-  def test_FString_to_s_works_with_dynamic_symbols
-    string = "abceslfkdslfkdsfsdlfsfd"
-    fstring = FString.to_s(string.to_sym)
-    assert_equal string, fstring
-    assert_equal Encoding::US_ASCII, fstring.encoding
-    assert_fstring fstring
-  end
-
-  def test_FString_to_s_call_to_s_on_non_symbols
-    object = Object.new
-    assert_equal object.to_s, FString.to_s(object)
   end
 
   def test_Symbol_to_s_is_patched

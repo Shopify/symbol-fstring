@@ -5,11 +5,7 @@ require 'bundler/setup'
 require "fstring"
 require 'benchmark/ips'
 
-FString.patch_symbol!
-
 Benchmark.ips do |bench|
-  bench.report("Symbol#to_s (orig)") { :foo.id2name }
-  bench.report("FString.symbol_to_s") { FString.symbol_to_s(:foo) }
-  bench.report("FString.to_s") { FString.to_s(:foo) }
-  bench.report("Symbol#to_s (patch)") { :foo.to_s }
+  bench.report("Symbol#to_s (orig)") { :foo.to_s }
+  bench.report("Symbol#name (patch)") { :foo.name }
 end
