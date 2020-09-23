@@ -10,7 +10,7 @@ In Ruby many APIs tend to accept symbols, but regularly convert them to string i
 The problem with this is that `Symbol#to_s` creates a new string every time it is invoked, and since it often happens
 in hotspots, it causes a lot of work for the garbage collector, and cause many identical strings to be kept in memory.
 
-There was [an attempt to make `Symbol#to_s` return it's internal fstring for Ruby 2.7](https://bugs.ruby-lang.org/issues/16150),
+There was [an attempt to make `Symbol#to_s` return its internal fstring for Ruby 2.7](https://bugs.ruby-lang.org/issues/16150),
 but unfortunately it got reverted, instead [Ruby 3.0 should have `Symbol#name`](https://github.com/ruby/ruby/commit/eb67c603ca7e435181684857e650b4633fda5bb6).
 
 This gem backports the `Symbol#name` method for older rubies, and optionally allow to replace `Symbol#to_s` by `Symbol#name`.
