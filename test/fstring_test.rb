@@ -9,6 +9,7 @@ class FStringTest < Minitest::Test
 
   def test_Symbol_name_returns_internal_symbol_fstring
     fstring = :foo.name
+    assert fstring.frozen?
     assert_equal 'foo', fstring
     assert_equal Encoding::US_ASCII, fstring.encoding
     assert_fstring fstring
@@ -17,6 +18,7 @@ class FStringTest < Minitest::Test
   def test_Symbol_name_works_with_dynamic_symbols
     string = "abceslfkdslfkdsfsdlfsfd"
     fstring = string.to_sym.name
+    assert fstring.frozen?
     assert_equal string, fstring
     assert_equal Encoding::US_ASCII, fstring.encoding
     assert_fstring fstring
@@ -25,6 +27,7 @@ class FStringTest < Minitest::Test
   def test_Symbol_to_s_is_patched
     with_patch do
       fstring = :foo.to_s
+      assert fstring.frozen?
       assert_equal 'foo', fstring
       assert_equal Encoding::US_ASCII, fstring.encoding
       assert_fstring fstring
@@ -34,6 +37,7 @@ class FStringTest < Minitest::Test
   def test_Symbol_id2name_is_not_patched
     with_patch do
       fstring = :foo.id2name
+      refute fstring.frozen?
       assert_equal 'foo', fstring
       assert_equal Encoding::US_ASCII, fstring.encoding
       refute_fstring fstring
