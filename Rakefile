@@ -9,10 +9,20 @@ end
 
 task :default => [:build, :test]
 
-require 'rake/extensiontask'
-GEMSPEC = eval(File.read('fstring.gemspec'))
-Rake::ExtensionTask.new('fstring', GEMSPEC) do |ext|
-  ext.ext_dir = 'ext/fstring'
-  ext.lib_dir = 'lib/fstring'
+if Symbol.method_defined?(:name)
+  task :compile do
+    # noop
+  end
+
+  task :clean do
+    # noop
+  end
+else
+  require 'rake/extensiontask'
+  GEMSPEC = eval(File.read('fstring.gemspec'))
+  Rake::ExtensionTask.new('fstring', GEMSPEC) do |ext|
+    ext.ext_dir = 'ext/fstring'
+    ext.lib_dir = 'lib/fstring'
+  end
+  task build: :compile
 end
-task build: :compile
