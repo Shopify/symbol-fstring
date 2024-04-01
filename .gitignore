@@ -9,5 +9,4 @@
 
 *.bundle
 *.so
-Gemfile.lock
 
