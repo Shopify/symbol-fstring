@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    symbol-fstring (1.0.2)
+    symbol-fstring (1.0.3)
 
 GEM
   remote: https://rubygems.org/
