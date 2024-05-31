@@ -10,6 +10,7 @@ module FString
       unless Symbol.method_defined?(:_original_to_s)
         Symbol.alias_method(:_original_to_s, :to_s)
       end
+      Symbol.alias_method(:to_s, :to_s)
       Symbol.alias_method(:to_s, :name)
     end
 
